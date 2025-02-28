@@ -1,1 +1,102 @@
-点进来的人请我吃干噎酸奶
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七言律诗生成</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+      .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 15px;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>七言律诗生成</h1>
+        <label for="personName">请输入人名：</label>
+        <input type="text" id="personName" required>
+        <button onclick="generatePoetry()">生成七言律诗</button>
+        <div id="result">
+            <p id="poetryResult"></p>
+        </div>
+    </div>
+    <script>
+        function generatePoetry() {
+            const personName = document.getElementById('personName').value;
+            // 这里假设通过调用外部API来生成七言律诗，实际需要替换为真实有效的API调用逻辑
+            const api_key = "YOUR_API_KEY";
+            const api_url = "YOUR_API_URL";
+            const user_prompt = `以人名“${personName}”创作一首七言律诗`;
+
+            diaoyongGPTdamoxing-getGPT({
+                "api_key": api_key,
+                "api_url": api_url,
+                "user_prompt": user_prompt
+            })
+             .then(response => {
+                    const poetryResultElement = document.getElementById('poetryResult');
+                    poetryResultElement.textContent = response;
+                })
+             .catch(error => {
+                    console.error('生成七言律诗时出错:', error);
+                    const poetryResultElement = document.getElementById('poetryResult');
+                    poetryResultElement.textContent = '生成七言律诗失败，请重试';
+                });
+        }
+    </script>
+</body>
+
+</html>
