@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>七言律诗生成</title>
+    <title>提取新闻标题关键词</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            background-color: #f0f0f0;
         }
 
-      .container {
+     .container {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -65,36 +65,20 @@
 
 <body>
     <div class="container">
-        <h1>七言律诗生成</h1>
-        <label for="personName">请输入人名：</label>
-        <input type="text" id="personName" required>
-        <button onclick="generatePoetry()">生成七言律诗</button>
+        <h1>提取新闻标题关键词</h1>
+        <label for="newsTitle">请输入新闻标题：</label>
+        <input type="text" id="newsTitle" required>
+        <button onclick="extractKeyword()">提取关键词</button>
         <div id="result">
-            <p id="poetryResult"></p>
+            <p id="keywordResult"></p>
         </div>
     </div>
     <script>
-        function generatePoetry() {
-            const personName = document.getElementById('personName').value;
-            // 这里假设通过调用外部API来生成七言律诗，实际需要替换为真实有效的API调用逻辑
-            const api_key = "YOUR_API_KEY";
-            const api_url = "YOUR_API_URL";
-            const user_prompt = `以人名“${personName}”创作一首七言律诗`;
-
-            diaoyongGPTdamoxing-getGPT({
-                "api_key": api_key,
-                "api_url": api_url,
-                "user_prompt": user_prompt
-            })
-             .then(response => {
-                    const poetryResultElement = document.getElementById('poetryResult');
-                    poetryResultElement.textContent = response;
-                })
-             .catch(error => {
-                    console.error('生成七言律诗时出错:', error);
-                    const poetryResultElement = document.getElementById('poetryResult');
-                    poetryResultElement.textContent = '生成七言律诗失败，请重试';
-                });
+        function extractKeyword() {
+            const newsTitle = document.getElementById('newsTitle').value;
+            const words = newsTitle.split(' ');
+            const keyword = words.length > 0? words[0] : '';
+            document.getElementById('keywordResult').textContent = keyword;
         }
     </script>
 </body>
